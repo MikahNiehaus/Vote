@@ -5,8 +5,21 @@
     </div>
   <% end %>
 
+  <p><strong><%= @user.name%>'s Topics</p>
 
-    <p><strong><%= @user.name%>'s Topics</p>
+
+      
+  <p><strong><%= @user.name%>'s Topics</p>
+
+
+      
+  <li><%= attr.name %> <%= link_to "Go on #{attr.name}", topic_path(attr)%> </li>
+
+  <li><%= attr.name %> <%= link_to "Show #{attr.name}", topic_path(attr) %><li>
+
+
+<% end %>
+
 
 <%= link_to "See Topics", topics_path %> 
 <p><%= link_to "New Topic", new_topic_path %></p>

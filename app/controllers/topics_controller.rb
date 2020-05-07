@@ -1,3 +1,4 @@
+require 'pry'
 class TopicsController < ApplicationController
 
     def index 
@@ -7,10 +8,24 @@ class TopicsController < ApplicationController
     end 
 
     def show 
-       #  binding.pry
-        @topic = Topic.find_by(id: params[:id])
-        @ride = @topic.rides.build(user_id: current_user.id)
-        @user = current_user
+           # binding.pry
+           @topic = Topic.find_by(id: params[:id])
+           #  @vote = @topic.vote.build(user_id: current_user.id)
+            @vote = Vote.new(user_id: current_user.id, topic_id: @topic.id)
+           @user = current_user
+           @mytopics = []
+       
+           Topic.all.each do |n| 
+           
+           if n.user_id == current_user.id
+          @mytopics << n
+             end
+ 
+      end
+
+    
+
+       
     end 
 
     def new
@@ -43,4 +58,5 @@ class TopicsController < ApplicationController
     end 
 
 end
+
 

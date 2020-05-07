@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post '/signin', to: "sessions#create"
   delete '/sessions', to: "sessions#destroy"
 
-  resources :rides
+  resources :votes
   resources :users
   resources :topics
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
