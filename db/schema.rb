@@ -12,25 +12,8 @@
 
 ActiveRecord::Schema.define(version: 2020_05_01_003341) do
 
-  create_table "topic", force: :cascade do |t|
+  create_table "topics", force: :cascade do |t|
     t.string "name"
-   
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "rating", force: :cascade do |t|
-    t.string "commit"
-    t.boolean "agree"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "vote", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "attraction_id"
-    t.integer "rating"
-    t.string "comments"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -40,7 +23,15 @@ ActiveRecord::Schema.define(version: 2020_05_01_003341) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    #t.boolean "admin", default: false
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "attraction_id"
+    t.integer "rating"
+    t.string "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

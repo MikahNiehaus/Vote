@@ -1,0 +1,16 @@
+<ul>
+    <% @topics.each do |attr| %>
+
+        <% if @user.admin == false  %>
+            <li><%= attr.name %> <%= link_to "Go on #{attr.name}", topic_path(attr)%> </li>
+        <% else%>
+            <li><%= attr.name %> <%= link_to "Show #{attr.name}", topic_path(attr) %><li>
+        <% end %> 
+
+    <% end %>
+
+</ul>
+
+
+       
+  

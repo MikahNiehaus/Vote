@@ -1,3 +1,4 @@
+
 <% flash.each do |type, msg| %>
     <div>
       <%= msg %>
@@ -5,11 +6,7 @@
   <% end %>
 
 
-    <p><strong>ADMIN</p>
+    <p><strong><%= @user.name%>'s Topics</p>
 
-<p><strong>Name:</strong> <%= @user.name %></p>
-<p><strong>Tickets: </strong><%= @user.tickets %></p>
-<p><strong>Mood: </strong><%= @user.mood %></p>
-<p><strong>Height: </strong><%= @user.height %> inches</p>
-<%= link_to "See attractions", attractions_path %> 
-<p><%= link_to "New Attraction", new_attraction_path %></p>
+<%= link_to "See Topics", topics_path %> 
+<p><%= link_to "New Topic, new_topic_path %></p>
