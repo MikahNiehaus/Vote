@@ -7,13 +7,14 @@ class TopicsController < ApplicationController
     end 
 
     def show 
-        # binding.pry
+       #  binding.pry
         @topic = Topic.find_by(id: params[:id])
         @ride = @topic.rides.build(user_id: current_user.id)
         @user = current_user
     end 
 
     def new
+        
         @topic = Topic.new
     end 
 
