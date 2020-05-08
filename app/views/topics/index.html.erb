@@ -1,10 +1,10 @@
 <ul>
+<p><strong>Vote on Topic</p>
     <% @topics.each do |attr| %>
 
       
-            <li><%= attr.name %> <%= link_to "Go on #{attr.name}", topic_path(attr)%> </li>
+            <li> <%= link_to "#{attr.name}", topic_path(attr)%> </li>
      
-            <li><%= attr.name %> <%= link_to "Show #{attr.name}", topic_path(attr) %><li>
        
 
     <% end %>

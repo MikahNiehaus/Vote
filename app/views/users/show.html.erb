@@ -8,17 +8,33 @@
   <p><strong><%= @user.name%>'s Topics</p>
 
 
-      
-  <p><strong><%= @user.name%>'s Topics</p>
+  <ul>
+ <% @user_topics = []%>
+       
+  <%Topic.all.each do |n| %>
+
+  <%if n.user_id == current_user.id%>
+  <% @user_topics << n%>
+  <% end%>
+
+  <%end%>
+  <%@user_topics %>
+
+  <%@user_topics.each do |attr| %>
+
+    
+          <li> <%= link_to " #{attr.name}", topic_path(attr)%> </li>
+
+     
+
+  <% end %>
+
+</ul>
 
 
-      
-  <li><%= attr.name %> <%= link_to "Go on #{attr.name}", topic_path(attr)%> </li>
-
-  <li><%= attr.name %> <%= link_to "Show #{attr.name}", topic_path(attr) %><li>
 
 
-<% end %>
+   
 
 
 <%= link_to "See Topics", topics_path %> 

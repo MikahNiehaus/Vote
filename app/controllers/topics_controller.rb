@@ -13,16 +13,17 @@ class TopicsController < ApplicationController
            #  @vote = @topic.vote.build(user_id: current_user.id)
             @vote = Vote.new(user_id: current_user.id, topic_id: @topic.id)
            @user = current_user
-           @mytopics = []
+        #    @user_topics = []
        
-           Topic.all.each do |n| 
-           
-           if n.user_id == current_user.id
-          @mytopics << n
-             end
- 
-      end
-
+        #    Topic.all.each do |n| 
+         
+        #    if n.user_id == current_user.id
+        #     @user_topics << n
+        #    end
+    
+        #    end
+        #    @user_topics 
+         
     
 
        
@@ -31,11 +32,12 @@ class TopicsController < ApplicationController
     def new
         
         @topic = Topic.new
+       # binding.pry
     end 
 
     def create 
-        # binding.pry
-        @topic = Topic.create(topic_params)
+        #  binding.pry
+        @topic = Topic.create(name: topic_params[:name], user_id: current_user.id)
         redirect_to topic_path(@topic)
 
     end 
