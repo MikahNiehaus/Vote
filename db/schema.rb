@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 2020_05_01_003341) do
   create_table "votes", force: :cascade do |t|
     t.integer "user_id"
     t.integer "topic_id"
-    t.integer "rating"
-    t.string "comments"
+    t.boolean "opinion"
+    t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
