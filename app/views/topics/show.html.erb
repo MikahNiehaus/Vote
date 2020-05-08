@@ -1,6 +1,7 @@
 <p><strong>Name:</strong><%= @topic.name %></p>
 
     <%= link_to 'Edit topic', [:edit, @topic]%></p>
+   
 
     <%= form_for @vote do |f| %>
     <%= f.hidden_field :user_id %><br />
@@ -15,3 +16,22 @@
     <% end %>
 
 
+    <% @topic_votes = []%>
+       
+    <%Vote.all.each do |n| %>
+  
+    <%if n.topic_id == @topic.id%>
+    <% @topic_votes << n%>
+    
+    <% end%>
+  
+    <%end%>
+    <%@topic_votes %>
+  
+    <% @topic_votes.each do |attr| %>
+  
+           <%=attr.comment%>
+  
+           <br>
+  
+     <%end %>

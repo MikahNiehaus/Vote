@@ -2,16 +2,17 @@ require 'pry'
 class TopicsController < ApplicationController
 
     def index 
-        # binding.pry
+        # biranding.pry
         @topics = Topic.all 
         @user = current_user
     end 
 
     def show 
-           # binding.pry
+            #binding.pry
            @topic = Topic.find_by(id: params[:id])
+        #    @vote = Vote.all
            #  @vote = @topic.vote.build(user_id: current_user.id)
-            @vote = Vote.new(user_id: current_user.id, topic_id: @topic.id)
+           @vote = Vote.new(user_id: current_user.id, topic_id: @topic.id)
            @user = current_user
         #    @user_topics = []
        
