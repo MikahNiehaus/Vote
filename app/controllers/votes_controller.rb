@@ -10,7 +10,18 @@ class VotesController < ApplicationController
 
         redirect_to user_path(vote.user)#, notice: alert
     end 
+    def edit
+        @vote = Vote.find_by(id: params[:id])
 
+    end 
+    def update
+        @vote = Vote.find_by(id: params[:id])
+     
+        @topic = Topic.find_by(id: params[:vote][:topic_id])
+        @vote.update(comment: params[:vote][:comment], opinion: params[:vote][:opinion])
+        redirect_to topic_path(@topic)
+
+    end 
     private
 
     def vote_params
