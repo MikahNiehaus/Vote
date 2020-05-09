@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
            @topic = Topic.find_by(id: params[:id])
         #    @vote = Vote.all
            #  @vote = @topic.vote.build(user_id: current_user.id)
-           @vote = Vote.new(user_id: current_user.id, topic_id: @topic.id)
+       @vote = Vote.new(user_id: current_user.id, topic_id: @topic.id)
            @user = current_user
         #    @user_topics = []
        
@@ -43,17 +43,13 @@ class TopicsController < ApplicationController
 
     end 
 
-    # def edit
-    #     @topic = Topic.find_by(id: params[:id])
-
-    # end 
-
-    # def update
-    #     @topic = Topic.find_by(id: params[:id])
-    #     @topic.update(topic_params)
-    #     redirect_to topic_path(@topic)
-
-    # end 
+    def destroy
+        @topic = Topic.find(params[:id])
+        redirect_to user_path(@topic.user_id)
+        
+        @topic.destroy
+       
+      end
 
     private 
     def topic_params

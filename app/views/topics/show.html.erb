@@ -1,8 +1,8 @@
 <p><strong>Name:</strong><%= @topic.name %></p>
 
-   
-   
-
+   <%if @topic.user_id == current_user.id%>
+<%= button_to "delete", @topic, :method => :delete %>
+<%end%>
     <%= form_for @vote do |f| %>
     <%= f.hidden_field :user_id %><br />
     <%= f.hidden_field :topic_id %><br />
