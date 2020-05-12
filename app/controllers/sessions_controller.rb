@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+skip_before_action :authentication_required, only: [:new,:create]   
     def create
         @user = User.find_or_create_by(uid: auth['uid']) do |u|
             u.name = auth['info']['name']
@@ -11,13 +12,17 @@ class SessionsController < ApplicationController
         render 'welcome/home'
     end
 
+    def destroy
+        session.delete("user_id")
+        redirect_to root_path
+    end
+    
     private
 
     def auth
         request.env['omniauth.auth']
     end
 
-    # skip_before_action :authentication_required, only: [:new,:create]
 
     # def new 
 
@@ -36,8 +41,5 @@ class SessionsController < ApplicationController
 
     # end 
 
-    # def destroy
-    #     session.delete("user_id")
-    #     redirect_to root_path
-    # end
+
 end 

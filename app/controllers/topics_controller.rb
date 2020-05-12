@@ -24,10 +24,7 @@ class TopicsController < ApplicationController
     
         #    end
         #    @user_topics 
-         
-    
 
-       
     end 
 
     def new
