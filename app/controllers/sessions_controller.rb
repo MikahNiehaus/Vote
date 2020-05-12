@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
         session[:user_id] = @user.id
 
-        render 'topics/show'
+        render 'welcome/home'
     end
 
     private
