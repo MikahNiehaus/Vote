@@ -21,7 +21,9 @@ ActiveRecord::Schema.define(version: 2020_05_01_003341) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "password_digest"
+    t.string "email"
+    t.integer "uid", limit: 8
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
