@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     end 
 
     def create
-        # binding.pry
+        binding.pry
         if (user = User.create(user_params))
           session[:user_id] = user.id
           redirect_to user_path(user)
