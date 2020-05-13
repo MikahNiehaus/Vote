@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :email
       t.integer :uid, limit: 8
       t.string :image
-
+      t.string :password_digest
       t.timestamps
     end
   end

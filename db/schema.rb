@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_05_01_003341) do
     t.string "email"
     t.integer "uid", limit: 8
     t.string "image"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

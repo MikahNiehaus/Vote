@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 skip_before_action :authentication_required, only: [:new,:create]   
     def create
-        binding.pry
+        # binding.pry
         #     if user = User.find_by(name: params[:user][:name])
     #         session[:user_id] = user.id
     #         redirect_to user_path(user)
