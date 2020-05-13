@@ -5,13 +5,21 @@ class UsersController < ApplicationController
     end 
 
     def create
-        binding.pry
-        if (user = User.create(user_params))
-          session[:user_id] = user.id
-          redirect_to user_path(user)
-        else
-          render 'new'
-        end
+#    binding.pry
+   if (user = User.create(user_params))
+    session[:user_id] = user.id
+    redirect_to user_path(user)
+  else
+    render 'new'
+  end
+        # if (user = User.create(name: user_params.name, password_digest: user_params.password))
+        #   session[:user_id] = user.id
+        #   redirect_to "http://localhost:3000/users/#{user.id}"
+        # #   redirect_to users_path(user)
+        # else
+          
+        #   render 'new'
+        # end
     end
 
     def show 

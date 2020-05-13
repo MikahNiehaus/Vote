@@ -1,35 +1,30 @@
 class SessionsController < ApplicationController
 skip_before_action :authentication_required, only: [:new,:create]   
     def create
-     #    binding.pry
-        #     if user = User.find_by(name: params[:user][:name])
-    #         session[:user_id] = user.id
-    #         redirect_to user_path(user)
-    #     else 
-    #         render 'new'
-    #     end
+        if auth == nil
+        if user = User.find_by(name: params[:user][:name])
+            session[:user_id] = user.id
+            redirect_to user_path(user)
+        else 
+            render 'new'
+        end
+
+    else
+     
         @user = User.find_or_create_by(uid: auth['uid']) do |u|
             u.name = auth['info']['name']
             u.email = auth['info']['email']
             u.image = auth['info']['image']
             u.id = User.last.id += 1
-        end
-
-      session[:user_id] = @user.id
-
+        end 
+        session[:user_id] = @user.id 
         render 'welcome/home'
     end
-     # def create 
-    #     # binding.pry
+     
 
-    #     if user = User.find_by(name: params[:user][:name])
-    #         session[:user_id] = user.id
-    #         redirect_to user_path(user)
-    #     else 
-    #         render 'new'
-    #     end
-
-    # end 
+       
+    end
+    
 
     def destroy
         session.delete("user_id")
