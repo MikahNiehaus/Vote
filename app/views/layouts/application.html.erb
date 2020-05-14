@@ -22,17 +22,15 @@
               <span class="icon-bar"></span>
             </button>
           <a class="navbar-brand" href="<%= root_url %>"/>Home</a>
-          <% if session[:user_id] %>
-        <img src="<%= @user.image %>">
-        <%end%>
-  
-          <% if !current_user %>
+      
+     
+         
+          <% if !session[:user] %>
             <%= link_to "Sign Up", new_user_path, class: "navbar-brand" %>
             <%= link_to "Log in", signin_path, class: "navbar-brand" %>
-          <% end %>
-  
-          <% if current_user %>
-            <%= link_to "#{current_user.name}'s profile", user_path(current_user), class:"navbar-brand"%>
+          <%else%>
+       
+            <%= link_to "#{session[:user]["name"]}'s profile", user_path(session[:user]["id"]), class:"navbar-brand"%>
             <%= link_to "Log Out", sessions_path, class:"navbar-brand",method:'delete' %>
            <% end %>
   

@@ -1,6 +1,6 @@
 <p><strong>Name:</strong><%= @topic.name %></p>
 
-   <%if @topic.user_id == current_user.id%>
+   <%if @topic.user_id == session[:user]["id"]%>
 <%= button_to "delete", @topic, :method => :delete %>
 <%end%>
     <%= form_for @vote do |f| %>
@@ -36,7 +36,7 @@
       <%if attr.opinion == false%>
       <%n+=1%>
       <%end%>
-      <%if attr.user_id == current_user.id%>
+      <%if attr.user_id == session["user"]["id"]%>
       <%= link_to attr.comment, [:edit, attr]%>
       <%else%>
            <%=attr.comment%>

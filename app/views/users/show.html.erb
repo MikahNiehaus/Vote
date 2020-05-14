@@ -13,7 +13,7 @@
        
   <%Topic.all.each do |n| %>
 
-  <%if n.user_id == current_user.id%>
+  <%if n.user_id == session["user"]["id"]%>
   <% @user_topics << n%>
   <% end%>
 

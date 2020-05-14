@@ -12,8 +12,8 @@ class TopicsController < ApplicationController
            @topic = Topic.find_by(id: params[:id])
         #    @vote = Vote.all
            #  @vote = @topic.vote.build(user_id: current_user.id)
-       @vote = Vote.new(user_id: current_user.id, topic_id: @topic.id)
-           @user = current_user
+       @vote = Vote.new(user_id: session[:user]["id"], topic_id: @topic.id)
+           @user = session[:user]
         #    @user_topics = []
        
         #    Topic.all.each do |n| 
@@ -35,7 +35,7 @@ class TopicsController < ApplicationController
 
     def create 
         #  binding.pry
-        @topic = Topic.create(name: topic_params[:name], user_id: current_user.id)
+        @topic = Topic.create(name: topic_params[:name], user_id: session[:user]["id"])
         redirect_to topic_path(@topic)
 
     end 
