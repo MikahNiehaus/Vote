@@ -21,12 +21,15 @@ class UsersController < ApplicationController
 
     def create
 #    binding.pry
-   if (user = User.create(name: user_params["name"], password_digest: user_params["password"]))
+   if new_user?
+    user = User.create(name: user_params["name"], password_digest: user_params["password"])
     session[:user] = user
     redirect_to user_path(user)
   else
-    render 'new'
+    
+     redirect_to signin_path
   end
+
     end
 
     def show 
@@ -36,6 +39,16 @@ class UsersController < ApplicationController
     end 
 
     private 
+    def new_user?
+    User.all.each do |u|
+      if u.name == user_params["name"]
+        return false
+      end
+    end
+    return true
+    end
+
+    
     def user_params
         params.require(:user).permit(:name, :password) 
     end 
