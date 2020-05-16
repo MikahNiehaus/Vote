@@ -3,11 +3,16 @@ class SessionsController < ApplicationController
     def create
       
         if auth == nil
-        if user = User.find_by(name: params[:user][:name])
+            #   binding.pry
+             
+        if correct_password?
+            binding.pry
+            @user = User.find_by(name: params[:user][:name])
+            @user = @user.try(:authenticate, params[:user][:password])
             session[:user] = user
             redirect_to user_path(user)
         else 
-            render 'new'
+            redirect_to signin_path
         end
 
     else
@@ -39,5 +44,12 @@ class SessionsController < ApplicationController
         request.env['omniauth.auth']
     end
 
-
+    def correct_password?
+        User.all.each do |u|
+          if u.password_digest == params["authenticity_token"]
+            return true
+          end
+        end
+        return false
+        end
 end 
