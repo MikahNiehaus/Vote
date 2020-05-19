@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 
 
     def show 
+
         # Finds the first record matching the specified conditions. 
         #  There is no implied ordering so if order matters, you should specify it yourself.
         @user = User.find_by(id: params[:id])

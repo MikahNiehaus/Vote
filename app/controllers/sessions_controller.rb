@@ -7,14 +7,22 @@ class SessionsController < ApplicationController
 
       #are you useing facebooke or normal
         if auth == nil
-            #   binding.pry
-                  
-           # Finds the first record matching the specified conditions. 
-           #  There is no implied ordering so if order matters, you should specify it yourself.
-            @user = User.find_by(name: params[:user][:name])
-            # session is the perfect place to put Little bits of data you want to keep around for more than one request.
-            session[:user] = @user
-            redirect_to user_path(@user)
+              # binding.pry
+              # binding.pry
+              @user = User.find_by(:name => params[:user][:name])
+              if @user && @user.authenticate(params[:password])
+                session[:user] = @user
+                redirect_to user_path(@user)
+              else
+                session[:error_message] = "Wrong password."
+              end
+        
+          #  # Finds the first record matching the specified conditions. 
+          #  #  There is no implied ordering so if order matters, you should specify it yourself.
+          #   @user = User.find_by(name: params[:user][:name])
+          #   # session is the perfect place to put Little bits of data you want to keep around for more than one request.
+          #   session[:user] = @user
+          #   redirect_to user_path(@user)
     else
         # binding.pry
         @user = User.find_or_create_by(uid: auth['uid']) do |u|
