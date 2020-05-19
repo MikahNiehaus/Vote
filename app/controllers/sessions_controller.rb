@@ -1,22 +1,13 @@
 class SessionsController < ApplicationController
     skip_before_action :authentication_required, only: [:new,:create]   
     def create
-      
+      #are you useing facebooke or normal
         if auth == nil
             #   binding.pry
-             
-        if correct_password?
-            binding.pry
             @user = User.find_by(name: params[:user][:name])
-            @user = @user.try(:authenticate, params[:user][:password])
-            session[:user] = user
-            redirect_to user_path(user)
-        else 
-            redirect_to signin_path
-        end
-
+            session[:user] = @user
+            redirect_to user_path(@user)
     else
-       
         # binding.pry
         @user = User.find_or_create_by(uid: auth['uid']) do |u|
             u.name = auth['info']['name']
