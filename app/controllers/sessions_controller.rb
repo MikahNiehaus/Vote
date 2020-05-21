@@ -1,17 +1,20 @@
-class SessionsController < ApplicationController
+require 'pry'
+class SessionsController < ApplicationController 
     # Check that the user has the right authorization to access clients
-    skip_before_action :authentication_required, only: [:new,:create]
-    
+    #  skip_before_action :authentication_required, only: [:new,:create]
+    #  skip_before_action :authentication_required
     # creates new user
+    
     def create
 
       #are you useing facebooke or normal
         if auth == nil
               # binding.pry
-              # binding.pry
+               binding.pry
               @user = User.find_by(:name => params[:user][:name])
               if @user && @user.authenticate(params[:password])
                 session[:user] = @user
+                session[:current_user] = @user
                 redirect_to user_path(@user)
               else
                 session[:error_message] = "Wrong password."
@@ -24,16 +27,15 @@ class SessionsController < ApplicationController
           #   session[:user] = @user
           #   redirect_to user_path(@user)
     else
-        # binding.pry
-        @user = User.find_or_create_by(uid: auth['uid']) do |u|
-            u.name = auth['info']['name']
-            u.email = auth['info']['email']
-            u.image = auth['info']['image']
-        end
-        # session is the perfect place to put Little bits of data you want to keep around for more than one request.
-        session[:user] = @user
-        render 'welcome/home'
-        # binding.pry
+      
+     hi =  UsersController.facebook(auth)
+       
+       hi.save
+# session is the perfect place to put Little bits of data you want to keep around for more than one request.
+session[:user] = hi
+session[:current_user] = hi
+
+render 'welcome/home'
     end
      
     end
@@ -42,6 +44,7 @@ class SessionsController < ApplicationController
     def destroy
         # session is the perfect place to put Little bits of data you want to keep around for more than one request.
         session.delete("user")
+        session.delete("current_user")
         redirect_to root_path
     end
     

@@ -19,7 +19,7 @@
     <% @topic_votes = []%>
        
     <%Vote.all.each do |n| %>
-  
+      
     <%if n.topic_id == @topic.id%>
     <% @topic_votes << n%>
     
@@ -29,6 +29,7 @@
     <%@topic_votes %>
   <%y=0%>
   <%n=0%>
+ 
     <% @topic_votes.each do |attr| %>
         <%if attr.opinion == true%>
         <%y+=1%>
@@ -36,6 +37,7 @@
       <%if attr.opinion == false%>
       <%n+=1%>
       <%end%>
+      
       <%if attr.user_id == session["user"]["id"]%>
       <%= link_to attr.comment, [:edit, attr]%>
       <%else%>

@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
     # Adds methods to set and authenticate against a BCrypt password. 
     #   This mechanism requires you to have a XXX_digest attribute. Where XXX is the attribute name of your desired password.
-    has_secure_password
+     has_secure_password
 
     # has_many association indicates a one-to-many connection with another model. 
     has_many :votes

@@ -5,7 +5,10 @@
     </div>
   <% end %>
 
-  <p><strong><%= @user.name%>'s Topics</p>
+<% session[:current_user]=@user%>
+<%session[:current_user]=session[:user] %>
+
+  <p><strong><%= @user["name"]%>'s Topics</p>
 
 
   <ul>

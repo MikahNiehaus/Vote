@@ -1,12 +1,14 @@
-require 'pry'
+
 class VotesController < ApplicationController
 
     def create 
-         #binding.pry
+        
          
-        vote = Vote.create(user_id: vote_params[:user_id], comment: params[:vote][:comment], topic_id: vote_params[:topic_id], opinion: params[:vote][:opinion])
+         vote = Vote.create(user_id: vote_params[:user_id], comment: params[:vote][:comment], topic_id: vote_params[:topic_id], opinion: params[:vote][:opinion])
         # Redirects the browser to the target specified in options. This parameter can be any one of:
-        redirect_to user_path(vote.user)#, notice: alert
+        
+        
+        redirect_to user_path(session["current_user"]["id"])
     end 
     def edit
         # Finds the first record matching the specified conditions. 

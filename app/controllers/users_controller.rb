@@ -1,17 +1,36 @@
 class UsersController < ApplicationController
     # Check that the user has the right authorization to access clients.
-    skip_before_action :authentication_required, only: [:new, :create]
-    # skip_before_action :authenticate_user!, :only => [:facebook, :new, :]
+    #  skip_before_action :authentication_required, only: [:new, :create]
+      # skip_before_action :authentication_required
+      
     def new 
         @user = User.new
     end 
 
+def self.facebook(auth)
+  #  binding.pry 
+  # auth.require(:info).permit(:name, :email)
+  @user = User.find_by(:name => auth['info']['name'])
+  if !(@user = User.find_by(:name => auth['info']['name']))
+  @user = User.create(password: auth['uid']) do |u|
+    u.name = auth['info']['name']
+    u.email = auth['info']['email']
+    # u.image = auth['info']['image']
+end
+end
+auth.clear
 
+
+return @user
+# binding.pry
+end
     def create
  
    if new_user?
+    # binding.pry
     user = User.create(user_params)
     # session is the perfect place to put Little bits of data you want to keep around for more than one request.
+    # binding.pry
     session[:user] = user
     redirect_to user_path(user)
   else
@@ -23,12 +42,9 @@ class UsersController < ApplicationController
 
 
     def show 
-
-        # Finds the first record matching the specified conditions. 
-        #  There is no implied ordering so if order matters, you should specify it yourself.
-        @user = User.find_by(id: params[:id])
-        # session is the perfect place to put Little bits of data you want to keep around for more than one request.
-        session[:user] = @user
+      # binding.pry
+    # @user = User.find_by(id: params[:id])
+    @user = session[:user] 
     end 
     
   # The keyword private tells Ruby that all methods defined from now on, are supposed to be private. 

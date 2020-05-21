@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   delete '/sessions', to: "sessions#destroy"
   root 'welcome#home'
 
-  get '/auth/facebook/callback' => 'sessions#create'
+  # get '/auth/facebook/callback' => 'sessions#create'
+  get '/auth/:provider/callback' => 'sessions#create'
 
   resources :votes
   resources :users

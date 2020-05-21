@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
             #binding.pry             
         # Finds the first record matching the specified conditions. 
         #  There is no implied ordering so if order matters, you should specify it yourself.
-        @topic = Topic.find_by(id: params[:id])
+        @topic =  Topic.find_by(id: params[:id])
         @vote = Vote.new(user_id: session[:user]["id"], topic_id: @topic.id)
         # session is the perfect place to put Little bits of data you want to keep around for more than one request.
         @user = session[:user]
