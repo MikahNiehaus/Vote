@@ -1,14 +1,15 @@
 class UsersController < ApplicationController
     # Check that the user has the right authorization to access clients.
-      # skip_before_action :authentication_required, only: [:new, :create]
+      #  skip_before_action :authentication_required, only: [:new, :create, :facebook, :show]
       # skip_before_action :authentication_required
+      skip_before_action [:new, :create, :facebook, :show], raise: false
       
     def new 
         @user = User.new
     end 
 
 def self.facebook(auth)
-  #  binding.pry 
+  
   # auth.require(:info).permit(:name, :email)
   @user = User.find_by(:name => auth['info']['name'])
   if !(@user = User.find_by(:name => auth['info']['name']))
@@ -32,8 +33,8 @@ end
       session[:user] = user
       redirect_to user_path(user)
     else
-      # errors.add(:signup, "same username or no password.")
-      
+      # To check which validations failed on an invalid attribute, you can use errors.details[:attribute].
+      #  It returns an array of hashes with an :error key to get the symbol of the validator:
       user.errors.details[:name] 
       redirect_to signin_path
       

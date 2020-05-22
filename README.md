@@ -1,4 +1,5 @@
-# Rails Amusement Park
+# Vote
+you can vote
 
 ## Objectives
 

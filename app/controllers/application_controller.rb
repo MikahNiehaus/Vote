@@ -1,7 +1,7 @@
 require 'pry'
 class ApplicationController < ActionController::Base
   # Turn on request forgery protection. Bear in mind that GET and HEAD requests are not checked.
-  #  protect_from_forgery with: :exception
+    protect_from_forgery with: :exception
   # Check that the user has the right authorization to access clients.
   # before_action :authentication_required
   # helper class method can receive and evaluate a block, making the methods defined available to the template

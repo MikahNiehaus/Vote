@@ -1,10 +1,22 @@
 require 'pry'
 class SessionsController < ApplicationController 
     # Check that the user has the right authorization to access clients
+    skip_before_action [:new, :create, :destroy], raise: false
     #  skip_before_action :authentication_required, only: [:new,:create]
     #  skip_before_action :authentication_required
     # creates new user
     
+
+      def vote_index
+         
+        @vote = Vote.all.where(user_id: session["current_user"]["id"]).length
+
+       render 'sessions/showvotes'
+      end
+
+
+
+
     def create
 
       #are you useing facebooke or normal
@@ -15,6 +27,7 @@ class SessionsController < ApplicationController
               if @user && @user.authenticate(params[:password])
                 session[:user] = @user
                 session[:current_user] = @user
+                # Redirects the browser to the target specified in options
                 redirect_to user_path(@user)
               else
                 session[:error_message] = "Wrong password."
@@ -28,12 +41,12 @@ class SessionsController < ApplicationController
           #   redirect_to user_path(@user)
     else
       
-     hi =  UsersController.facebook(auth)
+     facebook =  UsersController.facebook(auth)
        
-       hi.save
+     facebook.save
 # session is the perfect place to put Little bits of data you want to keep around for more than one request.
-session[:user] = hi
-session[:current_user] = hi
+session[:user] = facebook
+session[:current_user] = facebook
 
 render 'welcome/home'
     end

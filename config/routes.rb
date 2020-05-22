@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback' => 'sessions#create'
 
   resources :votes
-  resources :users
+  resources :users do 
+  get '/showvotes' , to: "sessions#vote_index" end
   resources :topics
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
