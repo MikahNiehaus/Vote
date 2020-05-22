@@ -33,6 +33,8 @@ end
       redirect_to user_path(user)
     else
       # errors.add(:signup, "same username or no password.")
+      
+      user.errors.details[:name] 
       redirect_to signin_path
       
     end
