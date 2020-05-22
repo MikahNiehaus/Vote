@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       #are you useing facebooke or normal
         if auth == nil
               # binding.pry
-               binding.pry
+             
               @user = User.find_by(:name => params[:user][:name])
               if @user && @user.authenticate(params[:password])
                 session[:user] = @user
