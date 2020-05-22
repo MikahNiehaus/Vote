@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
         if auth == nil
               # binding.pry
              
-              @user = User.find_by(:name => params[:user][:name])
+              @user = User.where(:name => params[:user][:name]).take
               if @user && @user.authenticate(params[:password])
                 session[:user] = @user
                 session[:current_user] = @user

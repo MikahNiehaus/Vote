@@ -11,16 +11,15 @@ class VotesController < ApplicationController
         redirect_to user_path(session["current_user"]["id"])
     end 
     def edit
-        # Finds the first record matching the specified conditions. 
-        #  There is no implied ordering so if order matters, you should specify it yourself.
-        @vote = Vote.find_by(id: params[:id])
-
+    #  use ActiveRecord Query methods within it (such as .where and .order) rather than native ruby methods
+        @vote = Vote.where(id: params[:id]).take
+        
     end 
     def update
         # Finds the first record matching the specified conditions. 
         #  There is no implied ordering so if order matters, you should specify it yourself.
-        @vote = Vote.find_by(id: params[:id])   
-        @topic = Topic.find_by(id: params[:vote][:topic_id])
+        @vote = Vote.where(id: params[:id]).take  
+        @topic = Topic.where(id: params[:vote][:topic_id]).take
         # Use update to change an attribute, check the validations and persist the change if validations pass.
         @vote.update(comment: params[:vote][:comment], opinion: params[:vote][:opinion])
         # Redirects the browser to the target specified in options. This parameter can be any one of:

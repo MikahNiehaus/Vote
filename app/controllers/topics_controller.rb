@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
             #binding.pry             
         # Finds the first record matching the specified conditions. 
         #  There is no implied ordering so if order matters, you should specify it yourself.
-        @topic =  Topic.find_by(id: params[:id])
+        @topic =  Topic.where(id: params[:id]).take
         @vote = Vote.new(user_id: session[:user]["id"], topic_id: @topic.id)
         # session is the perfect place to put Little bits of data you want to keep around for more than one request.
         @user = session[:user]
@@ -34,7 +34,7 @@ class TopicsController < ApplicationController
     end 
 
     def destroy
-        @topic = Topic.find(params[:id])
+        @topic = Topic.where(params[:id]).take
         # Redirects the browser to the target specified in options. This parameter can be any one of:
         redirect_to user_path(@topic.user_id)
         
