@@ -5,32 +5,7 @@
     </div>
   <% end %>
 
-<% session[:current_user]=@user%>
-<%session[:current_user]=session[:user] %>
-
-  <p><strong><%= @user["name"]%>'s Topics</p>
-
-
-  <ul>
- <% @user_topics = []%>
-       
-  <%Topic.all.each do |n| %>
-
-  <%if n.user_id == session["user"]["id"]%>
-  <% @user_topics << n%>
-  <% end%>
-
-  <%end%>
-  <%@user_topics %>
-
-  <%@user_topics.each do |attr| %>
-
-    
-          <li> <%= link_to " #{attr.name}", topic_path(attr)%> </li>
-
-     
-
-  <% end %>
+  <%= render "form" %> 
 
 </ul>
 

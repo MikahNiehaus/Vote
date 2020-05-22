@@ -1,0 +1,33 @@
+<% @topic_votes = []%>
+       
+    <%Vote.all.each do |n| %>
+      
+    <%if n.topic_id == @topic.id%>
+    <% @topic_votes << n%>
+    
+    <% end%>
+  
+    <%end%>
+    <%@topic_votes %>
+  <%y=0%>
+  <%n=0%>
+ 
+    <% @topic_votes.each do |attr| %>
+        <%if attr.opinion == true%>
+        <%y+=1%>
+      <%end%>
+      <%if attr.opinion == false%>
+      <%n+=1%>
+      <%end%>
+      
+      <%if attr.user_id == session["user"]["id"]%>
+      <%= link_to attr.comment, [:edit, attr]%>
+      <%else%>
+           <%=attr.comment%>
+     <%end%>
+     <br>
+  
+     <%end %>
+        
+     <p><strong>Agree:</strong><%=y%></p> 
+     <p><strong>Dissagre:</strong><%=n %></p> 
